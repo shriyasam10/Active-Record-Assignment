@@ -171,91 +171,147 @@ class model
     }
 }
     
+class account extends model 
+{
     
+    public $id;
+    public $email;
+    public $fname;
+    public $lname;
+    public $phone;
+    public $birthday;
+    public $gender;
+    public $password;
+    public $action;
+    public function __construct()
+    {
+        $this->tableName = 'accounts';
+    }
+}
+class todo extends model 
+{
+    public $id;
+    public $owneremail;
+    public $ownerid;
+    public $createddate;
+    public $duedate;
+    public $message;
+    public $isdone;
+    public $action;
+
+    public function __construct()
+    {
+        $this->tableName = 'todos';
+         
+    }
+}
+
+echo " Displaying all records of table Accounts </br>";
+accounts::findAll();
+echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
+
+echo " </br>Displaying all records of table Todos </br>";
+todos::findAll();
+echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>"; 
+
+echo " </br>Displaying record with id 2 of table Todos </br>";
+$todoRecord = todos::findOne(2);
+echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
+
+echo " </br>Displaying record with id 5 table Accounts </br>";
+$accountRecord = accounts::findOne(5);
+echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
+
+$newTodo = new todo();
+$newAccount = new account();
+
+$newTodo->action = 'insert';
+$newTodo->id =15;
+$newTodo->owneremail='teddybear@gmail.com';
+$newTodo->ownerid = 211;
+$newTodo->createddate='2017-06-15 09:34:21';
+$newTodo->duedate = '2018-09-15 09:34:21';
+$newTodo->message = 'new service';
+$newTodo->isdone = 0;
+$newTodo->save();
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+echo " </br>Inserted new record with id 15 in table Todos </br>";    
+todos::findAll();
+echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
+
+$newAccount->action = 'insert';
+$newAccount->id =16;
+$newAccount->email='mac@gmail.com';
+$newAccount->fname = 'mac';
+$newAccount->lname = 'nyx';
+$newAccount->phone = '12103748596';
+$newAccount->birthday = '1990-02-03 09:34:21';
+$newAccount->gender = 'female';
+$newAccount->password = 'password';
+$newAccount->save();
+
+echo " </br>Inserted new record with id 16 in table Accounts </br>";
+accounts::findAll();
+echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
+
+
+$upDateTodo = new todo();
+$upDateTodo->action = 'update';
+$upDateTodo->id = 15;
+$upDateTodo->owneremail = 'ihateteadybear@gmail.com'; 
+$upDateTodo->message = 'Updated Item';
+$upDateTodo->save();
+
+
+echo " </br>Updated record with id 15 in table Todos </br>";
+todos::findAll();
+echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
+
+
+$upDateAccount = new account();
+$upDateAccount->action ='update';
+$upDateAccount->id = 16;
+$upDateAccount->email = 'nyx@gmail.com'; 
+$upDateAccount->password = 'Updated password';
+$upDateAccount->save();
+
+echo " </br>Updated record with id 16 in table Accounts </br>";
+accounts::findAll();
+echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
+
+
+$deleteTodo = new todo();
+$deleteTodo->action ='delete';
+$deleteTodo->id = 12;
+$deleteTodo->save();
+
+echo " </br>Deleted new record with id 12 in table Todos </br>";
+todos::findAll();
+echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
+
+
+$deleteAccount = new account();
+$deleteAccount->action = 'delete';
+$deleteAccount->id = 13;
+$deleteAccount->save();
+
+echo " </br>Deleted new record with id 13 in table Accounts </br>";
+accounts::findAll();
+echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
 
 ?>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
