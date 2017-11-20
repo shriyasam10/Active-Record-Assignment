@@ -64,7 +64,152 @@ class collection
   }
 
 }
-class accounts extends collection 
+
+$db = dbconn::getconnection();
+echo "<b>Connected Successfully</b>"."<br>";
+
+class collection {
+
+      static public function create() {
+      $model = new static::$modelName;
+      return $model;
+    }
+        static public function findAll() {
+        $db = dbConn::getconnection();
+        $tableName = get_called_class();
+        $sql = 'SELECT * FROM ' . $tableName;
+        $statement = $db->prepare($sql);
+        $statement->execute();
+        $class = static::$modelName;
+        $statement->setFetchMode(PDO::FETCH_CLASS, $class);
+        $recordsSet =  $statement->fetchAll();
+        if(static::$modelName=='todo'){
+         echo "<table border=\"1\"><tr><th>id</th><th>owneremail</th><th>ownerid</th><th>createddate</th><th>duedate</th><th>message</th><th>isdone</th></tr>";
+         }
+         else{
+         echo "<table border=\"1\"><tr><th>id</th><th>email</th><th>fname</th><th>lname</th><th>phone</th><th>birthday</th><th>gender</th><th>password</th></tr>;
+         }
+         
+         foreach($recordsSet as $tempRecord){
+         if(static::$modelName=='todo'){
+         echo "<tr><td>".$tempRecord->id."</td><td>".$tempRecord->owneremail."</td><td>".$tempRecord->ownerid."</td><td>".$tempRecord->createddate."</td><td>".$tempRecord->duedate."</td><td>".$tempRecord->message."</td><td>".$tempRecord->isdone."</td></tr>";
+         }
+         
+         else{
+echo "<tr><td>".$tempRecord->id."</td><td>".$tempRecord->email."</td><td>".$tempRecord->fname."</td><td>".$tempRecord->lname."</td><td>".$tempRecord->phone."</td><td>".$tempRecord->birthday."</td><td>".$tempRecord->gender."</td><td>".$tempRecord->password."</td></tr>";
+             }
+}
+echo "</table>";
+        return $recordsSet;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*class accounts extends collection 
 {
   protected static $modelName = 'account';
 }
@@ -72,15 +217,20 @@ class todos extends collection
 {
   protected static $modelName = 'todo';
 }
- 
+$db = dbconn::getconnection();
+echo "<b>Connected Successfully</b>"."<br>";
+
 $records = accounts::findAll();
+//echo " Findall Records".$records."<br>";
 print_r($records);
 $records = todos::findAll();
 print_r($records);
 
 $records = accounts::findOne(1);
 print_r($records);
+//echo " Findall Records".$records."<br>";
 $records = todos::findOne(1);
+//echo " Findall Records".$records."<br>";
 print_r($records);
 
 
