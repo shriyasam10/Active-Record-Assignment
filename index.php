@@ -107,6 +107,90 @@ class todos extends collection
     protected static $modelName = 'todo';
 }
 
+class model 
+{
+    protected $tableName;
+    
+    public function save()
+    {  
+        
+    if ($this->action =='insert') 
+    {
+    $sql = $this->insert();
+    } 
+    elseif($this->action=='delete')
+    {
+    $sql = $this->delete();
+    }
+    else 
+    {
+    $sql = $this->update();
+    }
+    $db = dbConn::getconnection();
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $tableName = get_called_class();
+    $array = get_object_vars($this);
+    $columnString = implode(',', $array);
+    $valueString = ":".implode(',:', $array);
+    echo 'I just saved record: ' . $this->id;
+    }
+    
+    private function insert() 
+    {
+    if($this->tableName=='todos')
+    {
+		$sql = "Insert into ".$this->tableName." values(".$this->id.",'".$this->owneremail."',".$this->ownerid.",Date('".$this->createddate."'),Date('".$this->duedate."'),'".$this->message."',".$this->isdone.")";
+    }
+    else
+    {
+    $sql = "Insert into ".$this->tableName." values(".$this->id.",'".$this->email."','".$this->fname."','".$this->lname."','".$this->phone."',Date('".$this->birthday."'),'".$this->gender."','".$this->password."')";
+    }    
+    return $sql;        
+    }
+    
+    private function update() 
+    {
+    if($this->tableName=='todos')
+    {
+    $sql = "Update ".$this->tableName." set owneremail='".$this->owneremail."',message = '".$this->message."' where id = ".$this->id;
+    }
+    else
+    {
+    $sql = "Update ".$this->tableName." set email='".$this->email."',password = '".$this->password."' where id = ".$this->id;    
+    }    
+    return $sql;
+    echo 'I just updated record' . $this->id;
+    }
+    
+    public function delete() 
+    {
+    $sql = "Delete from ".$this->tableName." where id = ".$this->id;
+    return $sql;
+    echo 'I just deleted record' . $this->id;
+    }
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
 
 
 
