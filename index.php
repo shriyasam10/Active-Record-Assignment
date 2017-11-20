@@ -29,8 +29,73 @@ new dbconn();
 return self::$db;
 }
 }
+class collection 
+{
+  protected $tableName;
+  public static function createdb() 
+  {
+    $model = new static::$modelName;
+    return $model;
+  }
+  public static function findAll()
+  {
+    $db = dbConn::getconnection();
+    $tableName = get_called_class();
+    $sqlquery = 'SELECT * FROM ' . $tableName;
+    $statement = $db->prepare($sqlquery);
+    $statement->execute();
+    $childclass = static::$modelName;
+    $statement->setFetchMode(PDO::FETCH_CLASS, $childclass);
+    $recordsSet =  $statement->fetchAll();
+    return $recordsSet;
+  }
+  public static function findOne($id) 
+  {
+    $db = dbConn::getconnection();
+    $tableName = get_called_class();
+    $sqlquery = 'SELECT * FROM ' . $tableName . ' WHERE id =' . $id;
+    $statement = $db->prepare($sqlquery);
+    $statement->execute();
+    $childclass = static::$modelName;
+    $statement->setFetchMode(PDO::FETCH_CLASS, $childclass);
+    $recordsSet =  $statement->fetchAll();
+    return $recordsSet;
+    
+  }
 
-class collection
+}
+class accounts extends collection 
+{
+  protected static $modelName = 'account';
+}
+class todos extends collection 
+{
+  protected static $modelName = 'todo';
+}
+ 
+$records = accounts::findAll();
+print_r($records);
+$records = todos::findAll();
+print_r($records);
+
+$records = accounts::findOne(1);
+print_r($records);
+$records = todos::findOne(1);
+print_r($records);
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*class collection
 {
 
 static public function create()
@@ -42,13 +107,13 @@ return $model;
 static public function findAll()
 {
 $db = dbConn::getconnection();
-$tablename = get_called_class();
+$tableName = get_called_class();
 $sql = 'select * from'.$tableName;
 $statement = $db->prepare($sql);
 $statement->execute();
 $class = static::$modelName;
 $statement->setFetchMode(PDO::FETCH_CLASS, $class);
-$recordSet = $statement->fetchAll();
+$recordsSet = $statement->fetchAll();
 return $recordsSet;
 }
 
@@ -76,12 +141,23 @@ class todos extends collection
 protected static $modelName = 'todo';
 }
 
-class model
+$records = accounts::findOne(1);
+print_r($records);
+$records = todos::findOne(1);
+print_r($records);
+
+
+
+
+
+
+
+/*class model
 {
 protected $tableName;
 protected $isUpdate;
 
-public function save()
+private function save()
 {
 
 echo "ID is:".$this->id;
@@ -163,88 +239,164 @@ echo 'I just deleted record'.$this->id;
 }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
+/*class accounts extends model
+{
+
+public $id;
+public $email;
+public $fname;
+public $lname;
+public $phone;
+public $birthday;
+public $gender;
+public $password;
+
+public function __construct($isUp)
+{
+
+$this->tableName = 'accounts';
+$this->isUpdate = $isUp;
+
+}
+}
+
+class todo extends model
+{
+
+public $id;
+public $owneremail;
+public $ownerid;
+public $createddate;
+public $duedate;
+public $message;
+public $isdone;
+
+private function __construct($isUp)
+{
+
+$this->tableName = 'todos';
+$this->isUpdate = $isUp;
+
+}
+}
+
+$newAccount = new account('false');
+$newAccount->id = 12;
+$newAccount->owneremail='manoman@gmail.com';
+$newAccount->ownerid = 420;
+$newAccount->createddate='2017-06-15 09:34:21';
+$newTodo->duedate = '2017-06-15 09:34:21';
+$newTodo->message = 'new Item';
+$newTodo->isdone = 0;
+$newTodo->save();
+
+$deleteTodo = new todo('delete');
+$deleteTodo->id = 12;
+$deleteTodo->save();
+*/
 
 
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
