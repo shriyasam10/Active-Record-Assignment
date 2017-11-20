@@ -226,7 +226,7 @@ $newTodo = new todo();
 $newAccount = new account();
 
 $newTodo->action = 'insert';
-$newTodo->id =12;
+$newTodo->id =18;
 $newTodo->owneremail='teddybear@gmail.com';
 $newTodo->ownerid = 211;
 $newTodo->createddate='2017-06-15 09:34:21';
@@ -235,12 +235,12 @@ $newTodo->message = 'new service';
 $newTodo->isdone = 0;
 $newTodo->save();
     
-echo " </br>Inserted new record with id 12 in table Todos </br>";    
+echo " </br>Inserted new record with id 18 in table Todos </br>";    
 todos::findAll();
 echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
 
 $newAccount->action = 'insert';
-$newAccount->id =12;
+$newAccount->id =18;
 $newAccount->email='mac@gmail.com';
 $newAccount->fname = 'mac';
 $newAccount->lname = 'nyx';
@@ -250,52 +250,52 @@ $newAccount->gender = 'female';
 $newAccount->password = 'password';
 $newAccount->save();
 
-echo " </br>Inserted new record with id 12 in table Accounts </br>";
+echo " </br>Inserted new record with id 18 in table Accounts </br>";
 accounts::findAll();
 echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
 
 
 $upDateTodo = new todo();
 $upDateTodo->action = 'update';
-$upDateTodo->id = 12;
+$upDateTodo->id = 18;
 $upDateTodo->owneremail = 'ihateteadybear@gmail.com'; 
 $upDateTodo->message = 'Updated Item';
 $upDateTodo->save();
 
 
-echo " </br>Updated record with id 12 in table Todos </br>";
+echo " </br>Updated record with id 18 in table Todos </br>";
 todos::findAll();
 echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
 
 
 $upDateAccount = new account();
 $upDateAccount->action ='update';
-$upDateAccount->id = 12;
+$upDateAccount->id = 18;
 $upDateAccount->email = 'nyx@gmail.com'; 
 $upDateAccount->password = 'Updated password';
 $upDateAccount->save();
 
-echo " </br>Updated record with id 12 in table Accounts </br>";
+echo " </br>Updated record with id 18 in table Accounts </br>";
 accounts::findAll();
 echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
 
 
 $deleteTodo = new todo();
 $deleteTodo->action ='delete';
-$deleteTodo->id = 15;
+$deleteTodo->id = 14;
 $deleteTodo->save();
 
-echo " </br>Deleted new record with id 15 in table Todos </br>";
+echo " </br>Deleted new record with id 14 in table Todos </br>";
 todos::findAll();
 echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
 
 
 $deleteAccount = new account();
 $deleteAccount->action = 'delete';
-$deleteAccount->id = 16;
+$deleteAccount->id = 13;
 $deleteAccount->save();
 
-echo " </br>Deleted new record with id 16 in table Accounts </br>";
+echo " </br>Deleted new record with id 13 in table Accounts </br>";
 accounts::findAll();
 echo " </br> ----------------------------------------------------------------------------------------------------------------------------------------------------------</br>";
 
